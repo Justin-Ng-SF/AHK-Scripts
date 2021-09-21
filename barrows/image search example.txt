@@ -1,0 +1,27 @@
+
+
+Esc::ExitApp  ;
+
+
+Start(){
+Loop 1{
+
+coordMode,pixel
+ImageSearch, FoundX, FoundY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%,tunnel.PNG
+
+if (ErrorLevel = 2)
+    	click, 580, 329 ;
+else if (ErrorLevel = 1)	
+	click, 621, 329 ;
+else
+  	send, {space} ; 
+	sleep 1000 ;
+	send, 1 ;
+
+
+
+	}
+return
+}
+
+`::Start()

@@ -1,0 +1,16 @@
+
+    click, 643, 514 ; log out tab
+    sleep 750 ;
+    click, 644, 401 ; log out
+    sleep 250 ;
+    click, 644, 401 ; log out
+    sleep 250 ;
+    click, 644, 401 ; log out
+    sleep 250 ;
+    click, 644, 401 ; log out
+    sleep 250 ;
+    sleep 5000 ;
+    click, 437, 467 ; log in
+    sleep 250 ;
+    click, 437, 467 ; log in
+    sleep 10000 ;

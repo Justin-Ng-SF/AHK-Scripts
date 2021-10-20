@@ -17,23 +17,23 @@ uses defender, warhammer, amulet
 */
 
 Esc::ExitApp ;
-Pause::Suspend ;
+
 
 Start()
 {
-    Global runs := 1 ;
+
     
-    Loop 3
+    Loop 5
     { ; Loop %runs%{
         ; potion values are based off of doses
         Global supers := 32 ; supers restore 32 prayer points
         Global brews := 56 ; brews restore 16 hp
+        Global outOfBrews = 0 ;
         ; Global rangePot := 3 ; range pot
         ; Global ovl := 4 ; overload
-        Global leftClawDead := 0 ;
-        Global rightClawDead := 0 ;
-        Global headDead := 0 ;
-        Global room := start
+
+        ; Global room := start ;
+
 
 
         PresetScreen() ;
@@ -59,8 +59,6 @@ Start()
         Muttadile() ;
 
         DeathlyMages() ;
-
-        sleep 10000 ;
 
         ; Trade() ;
 
@@ -100,7 +98,7 @@ Shamans()
 
     MouseClick(0, 157, 213, 500) ; attack shaman
 
-    Rigour() ; on
+
     Fight("First Shaman", "0shaman\shamanDead.PNG", 9000) ;
 
     ; wait for second shaman to get in position
@@ -108,7 +106,7 @@ Shamans()
 
     MouseClick(0, 157, 213, 500) ; attack shaman
     Fight("Second Shaman", "0shaman\shamanDead.PNG", 9000) ;
-    Rigour() ; off
+
 
     ProMelee() ; on 
     MouseClick(0, 591, 97, 7000) ; lure 1
@@ -125,9 +123,9 @@ Shamans()
     }
 
     MouseClick(0, 242, 282, 500) ; attack shaman
-    Rigour() ; on
+
     Fight("Third Shaman", "0shaman\shamanDead.PNG", 9000) ;
-    Rigour() ; off
+
 
     CheckHpPray() ;
 }
@@ -217,13 +215,13 @@ Vanguards()
 
     MouseClick(0, 231, 40, 1500) ; attack vanguard range
 
-    Loop 300
+    Loop 60
     {
         if(vanguard1 = 1)
         {
             break ;
         }
-        Loop 30
+        Loop 40
         {
             if(CheckImage("Vanguard1", "", "2vanguard\vanguardDead.PNG")=1 || vanguard1 = 1)
             {
@@ -233,13 +231,15 @@ Vanguards()
             }
             else 
             {
-                Sleep 50 ;
+                Sleep 25 ;
             }
 
         }
-        MouseClick(0, 231, 40, 500) ; attack vanguard range
+        MouseClick(0, 231, 40, 0) ; attack vanguard range
         CheckHpPray() ;
+        MouseClick(0, 231, 40, 0) ; attack vanguard range
     }
+    vanguard1 := 1 ;
 
     CheckHpPray() ;
     ProMage()
@@ -250,13 +250,13 @@ Vanguards()
 
     ; Inventory() ;
     ; Item(6) ; tbow
-    Loop 300
+    Loop 60
     {
         if(vanguard1 = 2)
         {
             break ;
         }
-        Loop 30
+        Loop 40
         {
             if(CheckImage("Vanguard1", "", "2vanguard\vanguardDead.PNG")=1 || vanguard1 = 2)
             {
@@ -266,13 +266,15 @@ Vanguards()
             }
             else 
             {
-                Sleep 50 ;
+                Sleep 25 ;
             }
 
         }
-        MouseClick(0, 280, 104, 500) ; attack vanguard mage
+        MouseClick(0, 270, 104, 500) ; attack vanguard mage
         CheckHpPray() ;
+        MouseClick(0, 270, 104, 500) ; attack vanguard mage
     }
+    vanguard1 := 2 ;
     ; Fight("Vanguard 2", "2vanguard\vanguardDead.PNG", 15000) ;
     ;============================================================
     ;===================Vanguard Melee============================
@@ -283,12 +285,14 @@ Vanguards()
     ProMage() ; off
     CheckHpPray() ;
 
-    MouseClick(0, 280, 104, 1000) ; attack vanguard melee
+    Sleep 1500 ;
 
-    Fight("Vanguard Range", "2vanguard\vanguardDead.PNG", 15000) ;
+    MouseClick(0, 270, 104, 3000) ; attack vanguard melee
+    Rigour() ; off
+    Fight("Vanguard Range", "2vanguard\vanguardDead.PNG", 6000) ;
     ;============================================================
 
-    Rigour() ; off
+
 
     ; Auto(0) ; off
 
@@ -323,23 +327,23 @@ IceDemon()
 
     while(CheckImage("Ice Demon", "", "3iceDemon\fullInv.PNG")=0)
     {
-        Sleep 5000 ;
+        Sleep 3000 ;
         MouseClick(0, 266, 166, 0) ; chop tree until full inv
     }
     Inventory() ;
     Sleep 500 ;
     Item(5) ; drink ranger pot
 
-    MouseClick(0, 633, 45, 4500) ; 8.5 seconds to walk to north eastern brazier
+    MouseClick(0, 633, 45, 3500) ; 8.5 seconds to walk to north eastern brazier
 
     Sleep 250 ;
     Prayer() ;
     Sleep 250 ;
     ProMelee() ; on 
 
-    Sleep 1900 ;
+    Sleep 2900 ;
 
-    MouseClick(0, 310, 191, 1500) ; light brazier 1
+    MouseClick(0, 310, 191, 1250) ; light brazier 1
     MouseClick(0, 228, 305, 2250) ; light brazier 2
     MouseClick(0, 139, 235, 2250) ; light brazier 3
     MouseClick(0, 147, 95, 3500) ; light brazier 4
@@ -354,10 +358,10 @@ IceDemon()
 
     MouseClick(0, 280, 119, 500) ; attack ice demon
     ProMelee() ; off
-    Rigour() ; on
+
     Fight("Ice Demon", "3iceDemon\iceDemonDead.PNG", 12000) ;
 
-    Rigour() ; off
+
 
     Inventory() ;
     send {Shift Down} ; hold shift
@@ -449,7 +453,7 @@ Skeletons()
 
     Auto(0) ; off
     sleep 1000 ;
-    MouseClick(0, 664, 61, 7000) ; walk to front of tekton entrance
+    MouseClick(0, 664, 61, 6000) ; walk to front of tekton entrance
 
 }
 
@@ -572,12 +576,13 @@ Muttadile()
     Global room = "muttadile" ;
 
     MouseClick(0, 246, 126, 3000) ; enter muttadile room
-    MouseClick(0, 649, 53, 5000) ; lure muttadile 1
+    MouseClick(0, 649, 53, 4000) ; lure muttadile 1
     Prayer() ;
     ProMelee() ;
+    Sleep 1000 ;
     MouseClick(0, 659, 73, 5000) ; lure muttadile 2
     MouseClick(0, 660, 118, 3500) ; lure muttadile 3
-    Rigour() ; on
+
     MouseClick(0, 680, 365, 500) ; melee off
 
 
@@ -585,7 +590,7 @@ Muttadile()
     Fight("Muttadile", "6muttadile\muttadileDead.PNG", 10000) ;
 
     Prayer() ;
-    Rigour() ; off
+
 
     CheckHpPray() ;
 
@@ -607,9 +612,13 @@ DeathlyMages()
     Fight("Deathly Mage 1", "7deathly\deathlyMageDead.PNG", 15000) ;
 
     MouseClick(0, 353, 39, 5000) ; attack deathly mage 2
+    MouseClick(0, 353, 39, 1000) ; attack deathly mage 2
+    MouseClick(0, 353, 39, 1000) ; attack deathly mage 2
     Fight("Deathly Mage 2", "7deathly\deathlyMageDead.PNG", 15000) ;
 
     MouseClick(0, 396, 75, 5000) ; attack deathly mage 3
+    MouseClick(0, 396, 75, 1000) ; attack deathly mage 3
+    MouseClick(0, 396, 75, 1000) ; attack deathly mage 3
     Fight("Deathly Mage 3", "7deathly\deathlyMageDead.PNG", 15000) ;
 
     ProMage() ; off
@@ -629,9 +638,13 @@ DeathlyMages()
     Fight("Deathly Ranger 1", "7deathly\deathlyRangerDead.PNG", 15000) ;
 
     MouseClick(0, 371, 92, 5000) ; attack deathly ranger 2
+    MouseClick(0, 371, 92, 1000) ; attack deathly ranger 2
+    MouseClick(0, 371, 92, 1000) ; attack deathly ranger 2
     Fight("Deathly Ranger 2", "7deathly\deathlyRangerDead.PNG", 15000) ;
 
     MouseClick(0, 403, 57, 5000) ; attack deathly ranger 3
+    MouseClick(0, 403, 57, 1000) ; attack deathly ranger 3
+    MouseClick(0, 403, 57, 1000) ; attack deathly ranger 3
     Fight("Deathly Ranger 3", "7deathly\deathlyRangerDead.PNG", 15000) ;
 
     sleep 250 ;
@@ -647,14 +660,25 @@ DeathlyMages()
 
 Olm()
 {
+
     Global room = "olm" ;
     Global brews ;
     Global supers ;
+    Global outOfBrews ;
 
-    poison := 0 ;
+    Global leftClawDead := 0 ;
+    Global rightClawDead := 0 ;
+    Global headDead := 0 ;
+
+    Global poison := 0 ;
     MouseClick(0, 666, 58, 2000) ; walk towards hole
     Inventory() ; 
     Sleep 500 ;
+
+    if(outOfBrews=1)
+    {
+        return ;
+    }
 
     Loop 4 
     {
@@ -678,54 +702,82 @@ Olm()
 
     MouseClick(0, 264, 164, 2000) ; enter olms room
     MouseClick(0, 639, 70, 5500) ; walk to middle
-    ;==========================Left=================================
+    ;==========================HIS LEFT NOT YOURS=================================
 	MouseClick(0, 100, 35, 100) ; atk left hand
     Loop 500
     {
+        if( outOfBrews = 1)
+        {
+            return ;
+        }
+        if(CheckImage("Olm", "", "9olm\leftClawDead.PNG")=1 || leftClawDead = 1)
+        {
+            leftClawDead := 1 ;
+            break ;
+        }
         Loop 3
         {
             if(CheckImage("Olm", "", "9olm\leftClawDead.PNG")=1 || leftClawDead = 1)
             {
                 leftClawDead := 1 ;
-                send, //Left Claw {enter} ;
                 break ;
             }
-            else 
-            {
-                MouseClick(0, 100, 35, 100) ; atk left hand
+            ; check if its dead for at least one second
+            Loop 5 {
+                if(CheckImage("Olm", "", "9olm\leftClawDead.PNG")=1 || leftClawDead = 1)
+                {
+                    leftClawDead := 1 ;
+                    break ;
+                }
+                Sleep 200 ;
             }
+            ; atk left hand
+            MouseClick(0, 100, 35, 100) ; 
+
+            ; checkpoison does the walk in the function already if poisoned
+            ; if poisoned, move back 4 spaces and wait 1.5 seconds
+            ; check hp 5 times, drinking takes at least 1.5 seconds
             if(CheckPoison() = 1)
             {
-                poison++ ;
                 if(poison > 3)
                 {
                     MouseClick(0, 658, 110, 1500) ;
                     poison := 0 ;
                 }
-                Sleep 200 ;
-
+                Loop 5 {
+                    if(CheckImage("Olm", "", "9olm\leftClawDead.PNG")=1 || leftClawDead = 1)
+                    {
+                        leftClawDead := 1 ;
+                        break ;
+                    }
+                    else 
+                    {
+                        CheckHP(brews) ;
+                        Sleep 100 ;
+                    }
+                }
+                CheckPrayer(supers) ;
             }
-            if(CheckImage("Olm", "", "9olm\leftClawDead.PNG")=1 || leftClawDead = 1)
+            if(CheckHpPray() = 1)
             {
-                leftClawDead := 1 ;
-                send, //Left Claw {enter} ;
-                break ;
-            }
-            else{
+                Loop 5 {
+                    if(CheckImage("Olm", "", "9olm\leftClawDead.PNG")=1 || leftClawDead = 1)
+                    {
+                        leftClawDead := 1 ;
+                        break ;
+                    }
+                    else 
+                    {
+                        CheckHP(brews) ;
+                        Sleep 100 ;
+                    }
+                }
                 MouseClick(0, 100, 35, 100) ; atk left hand
-            }
-            CheckHpPray() ;
+            } ;
+            i
+            
         }
-        if(CheckImage("Olm", "", "9olm\leftClawDead.PNG")=1 || leftClawDead = 1)
-        {
-            leftClawDead := 1 ;
-            send, //Left Claw {enter} ;
-            break ;
-        }
-        else 
-        {
-            MouseClick(0, 100, 35, 100) ; atk left hand
-        }
+
         if(CheckImage("Olm", "", "9olm\leftClawDead.PNG")=1 || leftClawDead = 1)
         {
             leftClawDead := 1 ;
@@ -736,73 +788,119 @@ Olm()
         {
             MouseClick(0, 100, 35, 100) ; atk left hand
         }
-        CheckHpPray() ;
+        if(CheckHpPray()=1)
+        {
+            MouseClick(0, 100, 35, 100) ; atk left hand
+        } ;
     }
 
 
-    ;==========================Right=================================
-    MouseClick(0, 35, 344, 100) ; atk right hand
+    ;==========================HIS RIGHT NOT YOURS=================================
+    ; MouseClick(0, 35, 355, 100) ; atk right hand
     Loop 500
     {
+        MouseClick(0, 35, 355, 100) ; atk right hand
+        if(outOfBrews = 1)
+        {
+            return ;
+        }
+        if(CheckImage("Olm", "", "9olm\rightClawDead.PNG")=1 || rightClawDead = 1)
+        {
+            rightClawDead := 1 ;
+            break ;
+        }
+
         Loop 3
         {
             if(CheckImage("Olm", "", "9olm\rightClawDead.PNG")=1 || rightClawDead = 1)
             {
                 rightClawDead := 1 ;
-                send, //Right Claw Dead{enter} ;
                 break ;
             }
-            else {
-                MouseClick(0, 35, 344, 100) ; atk right hand
+            ; check if its dead for at least one second
+            Loop 5 {
+                if(CheckImage("Olm", "", "9olm\rightClawDead.PNG")=1 || rightClawDead = 1)
+                {
+                    rightClawDead := 1 ;
+                    break ;
+                }
+                Sleep 200 ;
             }
+            ; atk right hand
+            ; MouseClick(0, 35, 355, 100) ; atk right hand
+
+            ; checkpoison does the walk in the function already if poisoned
+            ; if poisoned, move back 4 spaces and wait 1.5 seconds
+            ; check hp 5 times, drinking takes at least 1.5 seconds
             if(CheckPoison() = 1)
             {
-                poison++ ;
                 if(poison > 3)
                 {
                     MouseClick(0, 658, 110, 1500) ;
                     poison := 0 ;
                 }
+                Loop 5 {
+                    if(CheckImage("Olm", "", "9olm\rightClawDead.PNG")=1 || rightClawDead = 1)
+                    {
+                        rightClawDead := 1 ;
+                        break ;
+                    }
+                    else 
+                    {
+                        CheckHP(brews) ;
+                        Sleep 100 ;
+                    }
+                }
+                CheckPrayer(supers) ;
+            }
 
-            }
-            if(CheckImage("Olm", "", "9olm\rightClawDead.PNG")=1 || rightClawDead = 1)
-            {
-                rightClawDead := 1 ;
-                send, //Right Claw Dead{enter} ;
-                break ;
-            }
-            else {
-                MouseClick(0, 35, 344, 100) ; atk right hand
-            }
-            CheckHpPray() ;
+
+            
         }
+
         if(CheckImage("Olm", "", "9olm\rightClawDead.PNG")=1 || rightClawDead = 1)
         {
             rightClawDead := 1 ;
-            send, //Right Claw Dead{enter} ;
+            send, //Right Claw {enter} ;
             break ;
         }
-        else 
+        ; else
+        ; {
+        ;     ; atk right hand
+        ;     MouseClick(0, 35, 355, 100) ; atk right hand
+        ; }
+        if(CheckHpPray() = 1) 
         {
-            MouseClick(0, 35, 344, 100) ; atk right hand
-        }
-        if(CheckImage("Olm", "", "9olm\rightClawDead.PNG")=1 || rightClawDead = 1)
-        {
-            rightClawDead := 1 ;
-            send, //Right Claw Dead{enter} ;
-            break ;
-        }
-        else 
-        {
-            MouseClick(0, 35, 344, 100) ; atk right hand
-        }
-        CheckHpPray() ;
+            Loop 5 {
+                if(CheckImage("Olm", "", "9olm\rightClawDead.PNG")=1 || rightClawDead = 1)
+                {
+                    rightClawDead := 1 ;
+                    break ;
+                }
+                else 
+                {
+                    CheckHP(brews) ;
+                    Sleep 100 ;
+                }
+            }
+            ; MouseClick(0, 35, 355, 100) ; atk right hand
+        } ;
+
     }
 
     ;==========================Head=================================
     MouseClick(0, 100, 184, 1000) ; attack head
     Loop 500
     {
+        if(CheckImage("Olm", "", "other\raidComplete.PNG")=1 || head = 1)
+        {
+            head := 1 ;
+            break ;
+        }
+        if(outOfBrews=1)
+        {
+            return ;
+        }
         Loop 3
         {
             if(CheckImage("Olm", "", "other\raidComplete.PNG")=1 || head = 1)
@@ -810,9 +908,9 @@ Olm()
                 head := 1 ;
                 break ;
             }
+
             if(CheckPoison() = 1)
             {
-                poison++ ;
                 if(poison > 2)
                 {
                     MouseClick(0, 658, 110, 2500) ;
@@ -1014,47 +1112,58 @@ Item(item)
 ;===================CHECK HP AND PRAYER============================
 Prayer()
 {
-    MouseClick(0, 710, 215, 500) ;
+    MouseClick(0, 710, 215, 1000) ;
 }
 Rigour()
 {
     MouseClick(0, 710, 215, 250) ;
     MouseClick(0, 645, 440, 500) ; 
 }
-ProMelee(){
+ProMelee()
+{
     MouseClick(0, 710, 215, 250) ;
     MouseClick(0, 680, 365, 500) ; 
 }
-ProMage(){
+ProMage()
+{
     MouseClick(0, 710, 215, 250) ;
     MouseClick(0, 605, 365, 500) ; 
 }
-ProRange(){
+ProRange()
+{
     MouseClick(0, 710, 215, 250) ;
     MouseClick(0, 645, 365, 500) ;
 }
-Piety(){
+Piety()
+{
     MouseClick(0, 710, 215, 250) ;
     MouseClick(0, 605, 440, 500) ;
 }
 
 CheckHpPray()
 {
-    Loop 4 
+    Global drink := 0 ;
+    Loop 3 
     {
         while(CheckImage("hp", "", "other\83hp.PNG")=1)
         {
+            drink := 1 ;
             CheckHp(brews) ;
             sleep 500 ;
         }
     }
-    Loop 3 
+    Loop 2 
     {
         while(CheckImage("pray", "", "other\65pray.PNG")=1)
-        {
+        {   
+            drink := 1
             CheckPrayer(supers) ;
             sleep 500 ;
         }
+    }
+    if (drink = 1)
+    {
+        return 1 ;
     }
 }
 
@@ -1077,7 +1186,8 @@ CheckPoison()
         }
         else
         {
-            MouseClick(0, 645, 110, 2500) ;
+            MouseClick(0, 645, 110, 1000) ;
+            poison++ ;
             return 1 ;
         }
 }
@@ -1212,10 +1322,12 @@ CheckHp(Brew)
             MouseClick(0, 710, 470, 1500) ; sip brew at [4][7]
             return brews -= 1 ;
         }
-        ; else if(brews<=0)
-        ; {
-        ;     send, /out of brews {enter} ;
-        ; }
+        else if(brews<=0)
+        {
+            send, //out of brews {enter} ;
+            outOfBrews := 1 ;
+            return brews ;
+        }
     }
 }
 
@@ -1271,8 +1383,7 @@ PresetScreen()
 {
     MouseClick(0, 565, 50, 100) ; minimap compass
 
-	MouseMove, 200, 200 ;
-	sleep 50 ;
+	MouseClick(3, 205, 205, 50) ;
 	Loop 14
 	{
 		Send {WheelUp} ;
@@ -1316,23 +1427,22 @@ CheckImage(roomName, errorMsg, screenShot)
 
 MouseClick(button, x, y, sleepTime)
 {
-        MouseMove, x, y ;
-        sleep 100 ;
-        if(button=0)
-        {
-            click, x, y ;
-        }
-        else if(button=1)
-        {
-            click, right, x, y ;
-        }
-    	sleep sleepTime ;
+    ; offset
+    x += 5 ;
+    y += 5 ;
+    MouseMove, x, y ;
+    sleep 100 ;
+    if(button=0)
+    {
+        click, x, y ;
+    }
+    else if(button=1)
+    {
+        click, right, x, y ;
+    }
+    sleep sleepTime ;
 }
 
-
-CheckDeath()
-{
-}
 
 Gear(runs)
 {
@@ -1340,7 +1450,7 @@ Gear(runs)
     MouseClick(0, 260, 88, 2000) ; bank
 
     MouseClick(0, 88, 82, 500) ;
-	MouseMove, 200, 200 ;
+	MouseClick(3, 205, 205, 50) ;
     Loop 10
     {
         Send {WheelUp} ; scroll up on bank tab
@@ -1452,4 +1562,4 @@ Trade()
 
 
 `::Start() ;
-
+Pause::Pause ;

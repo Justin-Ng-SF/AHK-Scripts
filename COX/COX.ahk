@@ -1561,5 +1561,4 @@ Trade()
 
 
 
-`::Start() ;
-Pause::Pause ;
+

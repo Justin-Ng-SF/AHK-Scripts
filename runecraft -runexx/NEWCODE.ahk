@@ -13,21 +13,22 @@ F2::Test() ;
 ; make sure spellbook is open, normal spells
 Start(){
     Global runs := 1000 ;
-    Loop %runs%{
-        send, ::meet {enter} ;
-        sleep 4000 ;
-        l(144, 191) ; click banker
-        sleep 2000 ; waiting to walk
-        l(404, 332) ; bank all 
-        lr(321, 277, 354) ; withdraw all
-        l(491, 57) ; exit bank
-        l(669, 313) ; skilling tp
-        sleep 1000 ;
-        l(341, 311) ; tp last place
-        sleep 4000 ;
-        l(302, 201) ;
         afkcheck() ;
-    }
+    ; Loop %runs%{
+    ;     send, ::meet {enter} ;
+    ;     sleep 4000 ;
+    ;     l(144, 191) ; click banker
+    ;     sleep 2000 ; waiting to walk
+    ;     l(404, 332) ; bank all 
+    ;     lr(321, 277, 354) ; withdraw all
+    ;     l(491, 57) ; exit bank
+    ;     l(669, 313) ; skilling tp
+    ;     sleep 1000 ;
+    ;     l(341, 311) ; tp last place
+    ;     sleep 4000 ;
+    ;     l(302, 201) ;
+    ;     afkcheck() ;
+    ; }
     return ;
 
 }
